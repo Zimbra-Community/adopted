@@ -600,7 +600,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.updateTasks = function ()
     request.query = "in:Tasks";
     request.offset = 0;
     request.limit = 100;
-    request.allowableTaskStatus = "COMP,NEED,INPR,WAITING,DEFERRED";
+    request.allowableTaskStatus = "NEED,INPR,WAITING,DEFERRED";
 
     var searchParams = {
         jsonObj:jsonObj,
