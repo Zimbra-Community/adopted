@@ -1,0 +1,45 @@
+.archiveHelpLink {
+  float: right;
+}
+
+input.numberTxt {
+	width: 30px;
+}
+
+table.archiveTable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.archiveTable input,label,select,span {
+	vertical-align: middle;
+}
+
+td.archiveHeader {
+	height: 35px;
+}
+
+div.archiveDeleteContinueHidden {	
+	display:none;
+}
+
+div.archiveDeleteContinue {
+    margin-top:25px;
+    clear:both; 
+    text-align: center;
+}
+
+#archiveDiv {
+	margin-top:10px;
+    clear:both;
+}
+
+div.archiveWaitStyle {
+    width:100%;
+    text-align: center;
+    padding: 20px 0px 20px 0;
+}
+
+div.archiveWaitStyleHidden {
+	display:none;
+}

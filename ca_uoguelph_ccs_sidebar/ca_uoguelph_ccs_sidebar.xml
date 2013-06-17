@@ -1,0 +1,15 @@
+
+<zimlet name="ca_uoguelph_ccs_sidebar" version="1.5"
+    label="News and Events Sidebar"
+    description="Displays news and upcoming events">
+    <include>sidebar.js</include>
+    <includeCSS>sidebar.css</includeCSS>
+    <handlerObject>ca_uoguelph_ccs_sidebarHandlerObject</handlerObject>
+    <userProperties>
+        <property name="show_today" type="boolean" visible="false" />
+        <property name="show_tomorrow" type="boolean" visible="false" />
+        <property name="show_nextweek" type="boolean" visible="false" />
+        <property name="show_news" type="boolean" visible="false" />
+    </userProperties>
+</zimlet>
+
