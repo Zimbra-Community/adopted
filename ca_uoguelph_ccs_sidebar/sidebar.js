@@ -57,13 +57,56 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
         parent: this.getShell(),
         posStyle: Dwt.ABSOLUTE_STYLE
     });
-    this.dwtRoot.getHtmlElement().style.overflowY = 'auto';
-    this.dwtRoot.getHtmlElement().style.overflowX = 'hidden';
+
     this.dwtRoot.setZIndex (300);
+ 
+    this.dwtSash = new DwtSash({
+        parent: this.dwtRoot,
+        style: DwtSash.HORIZONTAL_STYLE
+    });
+
+    this.dwtSash.setLocation(-5, "50%");
+
+    this.dwtSash.registerCallback(function(delta) {
+        var sidebar = document.getElementById("skin_container_sidebar_ad");
+        var size = Dwt.getSize(sidebar);
+
+        size.x = size.x - delta;
+
+        Dwt.setSize(sidebar, size.x, size.y);
+
+        appCtxt.getAppViewMgr().fitAll();
+        this.resize();
+
+        return delta;
+
+    }, this);
+
+    this.dwtSash.addListener(DwtEvent.ONMOUSEUP, new AjxListener(
+        this,
+        function (e) {
+
+            var sidebar = document.getElementById("skin_container_sidebar_ad");
+            var size = Dwt.getSize(sidebar);
+
+            this.setUserProperty("sidebarX", size.x);
+            this.setUserProperty("sidebarY", size.y, true);
+
+        },
+        []
+    ));
+    
+    this.dwtSubRoot = new DwtComposite({
+        parent: this.dwtRoot,
+        posStyle: Dwt.ABSOLUTE_STYLE
+    });
+
+    this.dwtSubRoot.getHtmlElement().style.overflowY = 'auto';
+    this.dwtSubRoot.getHtmlElement().style.overflowX = 'hidden';
 
     this.dwtLabelTop = new DwtButton
     ({
-        parent: this.dwtRoot,
+        parent: this.dwtSubRoot,
         id: 'ca_uoguelph_ccs_sidebar_tree_top'
     });
     this.dwtLabelTop.setToolTipContent(this.getText("HideEvents"));
@@ -79,7 +122,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
 
     this.dwtTree = new DwtTree
     ({
-        parent: this.dwtRoot
+        parent: this.dwtSubRoot
     });
 
     //this.dwtTree.getHtmlElement().style.overflowY = 'auto';
@@ -182,6 +225,39 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
     }
 
     this.dwtTree.addTreeListener (new AjxListener(this, this.onTreeEvent));
+
+    var visible = this.getUserProperty("sidebarOn");
+
+    if (visible === null) {
+
+        this.setUserProperty("sidebarOn", false, true);
+
+    } else if (visible) {
+
+        this.setShow(true);
+
+    }
+
+    var sidebar = document.getElementById("skin_container_sidebar_ad");
+    var sidebarX = this.getUserProperty("sidebarX");
+    var sidebarY = this.getUserProperty("sidebarY");
+
+    if ((sidebarX === null) || (sidebarY === null)) {
+
+        var size = Dwt.getSize(sidebar);
+
+        this.setUserProperty("sidebarX", size.x);
+        this.setUserProperty("sidebarY", size.y, true);
+
+    } else {
+
+        Dwt.setSize(sidebar, sidebarX, sidebarY);
+
+        appCtxt.getAppViewMgr().fitAll();
+        this.resize();
+
+    }
+
 };
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.onShowView = function (view) {
@@ -685,6 +761,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.setVisible = function (visible) {
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.setShow = function (show) {
     this.show[this.appId] = show;
+    this.setUserProperty("sidebarOn", show, true);
     this.update();
     this.notify();
 };
@@ -711,6 +788,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.resize = function ()
         rect = Dwt.getBounds(document.getElementById('skin_td_sidebar_ad'));
         this.dwtRoot.setLocation (rect.x + 8, rect.y);
         this.dwtRoot.setSize(rect.width - 8, rect.height);
+        this.dwtSash.setLocation(-5, "50%");
     }
 };
 
