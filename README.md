@@ -15,9 +15,9 @@ new features added.
 Currently available
 -------------------
 
- * Archive zimlet (ca_uoguelph_ccs_archive). [Original zimlet by ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/archive)
- * Colored Emails Plus (ca_uoguelph_ccs_coloredemailsplus). [Original zimlet ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/coloured-emails-plus)
- * Sidebar zimlet (ca_uoguelph_ccs_sidebar). [Original zimlet by ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/news-and-events-sidebar)
- * Email-Templates zimlet (com_zimbra_emailtemplates). [Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/email-templates)
- * Linkedin zimlet (com_zimbra_linkedin). [Original zimlet by jiankuan](http://gallery.zimbra.com/type/zimlet/linkedin-zimlet)
- * Sticky Notes (com_zimbra_stickynotes). [Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/sticky-notes)
+ * Archive zimlet [ca_uoguelph_ccs_archive](https://github.com/Zimbra-Community/adopted/tree/master/ca_uoguelph_ccs_archive). ([Original zimlet by ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/archive))
+ * Colored Emails Plus [ca_uoguelph_ccs_coloredemailsplus](https://github.com/Zimbra-Community/adopted/tree/master/ca_uoguelph_ccs_coloredemailsplus). ([Original zimlet ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/coloured-emails-plus))
+ * Sidebar zimlet [ca_uoguelph_ccs_sidebar](https://github.com/Zimbra-Community/adopted/tree/master/ca_uoguelph_ccs_sidebar). ([Original zimlet by ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/news-and-events-sidebar))
+ * Email-Templates zimlet [com_zimbra_emailtemplates](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_emailtemplates). ([Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/email-templates))
+ * Linkedin zimlet [com_zimbra_linkedin](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_linkedin). ([Original zimlet by jiankuan](http://gallery.zimbra.com/type/zimlet/linkedin-zimlet))
+ * Sticky Notes [com_zimbra_stickynotes](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_stickynotes). ([Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/sticky-notes))
