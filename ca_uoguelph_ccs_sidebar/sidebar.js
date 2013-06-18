@@ -74,6 +74,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
         size.x = size.x - delta;
 
         Dwt.setSize(sidebar, size.x, size.y);
+        Dwt.setSize(document.getElementById("skin_td_sidebar_ad"), size.x, size.y);
 
         appCtxt.getAppViewMgr().fitAll();
         this.resize();
@@ -252,6 +253,11 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
     } else {
 
         Dwt.setSize(sidebar, sidebarX, sidebarY);
+        Dwt.setSize(
+            document.getElementById("skin_td_sidebar_ad"),
+            sidebarX,
+            sidebarY
+        );
 
         appCtxt.getAppViewMgr().fitAll();
         this.resize();
@@ -785,9 +791,10 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.resize = function ()
 {
     var rect;
     if (this.visible) {
-        rect = Dwt.getBounds(document.getElementById('skin_td_sidebar_ad'));
+        rect = Dwt.getBounds(document.getElementById('skin_container_sidebar_ad'));
         this.dwtRoot.setLocation (rect.x + 8, rect.y);
         this.dwtRoot.setSize(rect.width - 8, rect.height);
+        this.dwtSubRoot.setSize(rect.width - 8, rect.height);
         this.dwtSash.setLocation(-5, "50%");
     }
 };
