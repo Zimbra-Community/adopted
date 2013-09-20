@@ -26,7 +26,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.constructor = ca_uoguelph_ccs_sid
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.dateFormat = new AjxDateFormat (I18nMsg.formatDateShort);
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.timeFormat = new AjxDateFormat (I18nMsg.formatTimeShort);
 
-ca_uoguelph_ccs_sidebarHandlerObject.HELP_URL = 'HelpUrl';
+ca_uoguelph_ccs_sidebarHandlerObject.HELP_URL = 'helpurl';
 
 ca_uoguelph_ccs_sidebarHandlerObject.HIDE_PATTERN = /^~/;
 
@@ -130,79 +130,40 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
     //this.dwtTree.getHtmlElement().style.overflowX = 'hidden';
 
 
-    this.dwtHelp = new DwtTreeItem
-    ({
-        parent: this.dwtTree,
-        text: this.getText("Help"),
-        selectable: false,
-        singleClickAction: true
-    });
-    this.dwtHelp.addListener
-    (
-        DwtEvent.ONMOUSEUP,
-        new AjxListener (this, this.showHelp)
-        );
+    if (this.getConfig("enable_help").toLowerCase() == "true") {
+        this.dwtHelp = new DwtTreeItem
+        ({
+            parent: this.dwtTree,
+            text: this.getText("Help"),
+            selectable: false,
+            singleClickAction: true
+        });
+        this.dwtHelp.addListener
+        (
+            DwtEvent.ONMOUSEUP,
+            new AjxListener (this, this.showHelp)
+            );
+    }
 
-
-    this.dwtToday = new DwtTreeItem
-    ({
-        parent: this.dwtTree,
-        text: this.getText("Today"),
-        className: "overviewHeader"
-    });
-    new DwtTreeItem (this.dwtToday, 0, this.getText("Loading"));
-    this.dwtToday.enableSelection(false);
-    this.dwtToday.setData("show_pref", "show_today");
-    this.dwtToday.setData("show_pref_default", "true");
-    this.dwtToday.setExpanded(this.getShowPref(this.dwtToday));
-
-    this.dwtTomorrow = new DwtTreeItem
-    ({
-        parent: this.dwtTree,
-        text: this.getText("Tomorrow"),
-        className: "overviewHeader"
-    });
-    new DwtTreeItem (this.dwtTomorrow, 0, this.getText("Loading"));
-    this.dwtTomorrow.enableSelection(false);
-    this.dwtTomorrow.setData("show_pref", "show_tomorrow");
-    this.dwtTomorrow.setData("show_pref_default", "true");
-    this.dwtTomorrow.setExpanded(this.getShowPref(this.dwtTomorrow));
-
-    this.dwtThisWeek = new DwtTreeItem
-    ({
-        parent: this.dwtTree,
-        text: this.getText("ThisWeek"),
-        className: "overviewHeader"
-    });
-    new DwtTreeItem (this.dwtThisWeek, 0, this.getText("Loading"));
-    this.dwtThisWeek.enableSelection(false);
-    this.dwtThisWeek.setData("show_pref", "show_thisweek");
-    this.dwtThisWeek.setData("show_pref_default", "false");
-    this.dwtThisWeek.setExpanded(this.getShowPref(this.dwtThisWeek));
-
-    this.dwtTasks = new DwtTreeItem
-    ({
-        parent: this.dwtTree,
-        text: this.getText("Tasks"),
-        className: "overviewHeader"
-    });
-    new DwtTreeItem (this.dwtTasks, 0, this.getText("Loading"));
-    this.dwtTasks.enableSelection(false);
-    this.dwtTasks.setData("show_pref", "show_tasks");
-    this.dwtTasks.setData("show_pref_default", "false");
-    this.dwtTasks.setExpanded(this.getShowPref(this.dwtTasks));
-
-    this.dwtNews = new DwtTreeItem
-    ({
-        parent: this.dwtTree,
-        text: this.getText("News"),
-        className: "overviewHeader"
-    });
-    new DwtTreeItem (this.dwtNews, 0, this.getText("Loading"));
-    this.dwtNews.enableSelection(false);
-    this.dwtNews.setData("show_pref", "show_news");
-    this.dwtNews.setData("show_pref_default", "false");
-    this.dwtNews.setExpanded(this.getShowPref(this.dwtNews));
+    var sections = ["Today","Tomorrow","Week","Tasks","News"];
+    for (var i in sections) {
+        var section=sections[i];
+        if (this.getConfig("enable_"+section.toLowerCase()).toLowerCase() ==
+            "true") {
+            var dti=new DwtTreeItem
+            ({
+                parent: this.dwtTree,
+                text: this.getText(section),
+                className: "overviewHeader"
+            });
+            new DwtTreeItem (dti, 0, this.getText("Loading"));
+            dti.enableSelection(false);
+            dti.setData("show_pref", "show_"+section.toLowerCase());
+            dti.setData("show_pref_default", "false");
+            dti.setExpanded(this.getShowPref(dti));
+            this["dwt"+section]=dti;
+        }
+    }
 
     /* Remove class from sidebar ad */
     document.getElementById('skin_td_sidebar_ad').className = "";
@@ -716,27 +677,27 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.update = function ()
     var startTime = startDate.getTime();
     startDate.setHours(0, 0, 0, 0);
     var endTime = startDate.getTime() + 1000 * 60 * 60 * 24;
-    if (this.getShowPref(this.dwtToday)){
+    if ("dwtToday" in this && this.getShowPref(this.dwtToday)){
         this.updateTreeItem (this.dwtToday, startTime, endTime, false);
     }
 
     startTime = endTime;
     endTime = endTime + 1000 * 60 * 60 * 24;
-    if (this.getShowPref(this.dwtTomorrow)){
+    if ("dwtTomorrow" in this && this.getShowPref(this.dwtTomorrow)){
         this.updateTreeItem (this.dwtTomorrow, startTime, endTime, false);
     }
 
     startTime = endTime;
     endTime = endTime + 1000 * 60 * 60 * 24 * 5;
-    if (this.getShowPref(this.dwtThisWeek)) {
-        this.updateTreeItem (this.dwtThisWeek, startTime, endTime, true);
+    if ("dwtWeek" in this && this.getShowPref(this.dwtWeek)) {
+        this.updateTreeItem (this.dwtWeek, startTime, endTime, true);
     }
 
-    if (this.getShowPref(this.dwtTasks)) {
+    if ("dwtTasks" in this && this.getShowPref(this.dwtTasks)) {
         this.updateTasks ();
     }
 
-    if (this.getShowPref(this.dwtNews)) {
+    if ("dwtNews" in this && this.getShowPref(this.dwtNews)) {
         this.updateNews ();
     }
 
@@ -800,7 +761,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.resize = function ()
 };
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.showHelp = function () {
-    window.open(this.getText(ca_uoguelph_ccs_sidebarHandlerObject.HELP_URL));
+    window.open(this.getConfig(ca_uoguelph_ccs_sidebarHandlerObject.HELP_URL));
 };
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.showTaskItem =
