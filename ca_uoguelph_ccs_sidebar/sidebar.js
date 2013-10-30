@@ -564,7 +564,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.updateTasks = function ()
     };
     request.offset = 0;
     request.types = ZmSearch.TYPE[ZmItem.TASK];
-    request.query = "in:Tasks";
+    request.query = "is:remote OR is:local";
     request.offset = 0;
     request.limit = 100;
     request.allowableTaskStatus = "NEED,INPR,WAITING,DEFERRED";
@@ -639,7 +639,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.showTasks = function (items, resu
             new AjxListener (
                 this,
                 this.showTaskItem,
-                [ item.id ]
+                [ item ]
             )
         );
     }
@@ -765,31 +765,33 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.showHelp = function () {
 };
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.showTaskItem =
-    function (itemId, evt) {
+    function (task, evt) {
 
-        var item;
+        var folder,
+            taskApp,
+            taskObject;
 
-        item = appCtxt.getById(itemId);
+        folder = appCtxt.getById(task.l)
 
-        if (!item) {
+        taskApp = appCtxt.getApp("Tasks");
 
-            AjxTimedAction.scheduleAction(
-                new AjxTimedAction(
-                    this,
-                    this.showTaskItem,
-                    [
-                        itemId, evt
-                    ]
-                ),
-                1000
-            );
+        taskApp.launch();
 
-            return;
+        taskApp.search(
+            folder,
+            null,
+            null,
+            new AjxCallback(
+                this,
+                function(taskApp, task, ev) {
 
-        }
+                    taskObject = appCtxt.getById(task.id);
 
-        AjxDispatcher.run("GetTaskController").show(
-            item,
-            2
+                    taskApp.getTaskListController()._editTask(taskObject);
+
+                },
+                [taskApp, task]
+            )
         );
+
     };
