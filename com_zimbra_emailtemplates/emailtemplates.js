@@ -144,8 +144,10 @@ Com_Zimbra_EmailTemplates.prototype._addStandardMenuItems =
 function(menu) {
 	var mi = menu.createMenuItem("reloadTemplates", {image:"Refresh", text:this.getMessage("EmailTemplatesZimlet_reloadTemplates")});
 	mi.addSelectionListener(new AjxListener(this, this._getRecentEmails, true));
-	var mi = menu.createMenuItem("preferences", {image:"Resource", text:this.getMessage("EmailTemplatesZimlet_preferences")});
+	var mi = menu.createMenuItem("preferences", {image:"Preferences", text:this.getMessage("EmailTemplatesZimlet_preferences")});
 	mi.addSelectionListener(new AjxListener(this, this._displayPrefDialog));
+    var mi = menu.createMenuItem("save", {image:"Save", text:this.getMessage("EmailTemplatesZimlet_save")});
+    mi.addSelectionListener(new AjxListener(this, this._saveTemplate));
 };
 
 
@@ -238,6 +240,7 @@ function(params) {
 	html[i++] = "<TABLE  class='emailTemplates_table' width=100% cellspacing=3 cellpadding=3>";
 	for (var k = 0; k < dataArry.length; k++) {
 		var key = dataArry[k];
+        key = key.replace(/\$\{([^}]*)\}/, "$1");
 		var id = Dwt.getNextId();
 		this._replaceFieldIds.push(id);
 		this._replaceFieldIdsMap.push({key:key, id:id});
@@ -523,7 +526,7 @@ function() {
 	var dlg = appCtxt.getYesNoMsgDialog();
 	dlg.registerCallback(DwtDialog.YES_BUTTON, this._yesButtonClicked, this, dlg);
 	dlg.registerCallback(DwtDialog.NO_BUTTON, this._NoButtonClicked, this, dlg);
-	dlg.setMessage("The browser must be refreshed for the changes to take effect.  Continue?", DwtMessageDialog.WARNING_STYLE);
+	dlg.setMessage(this.getMessage("EmailTemplatesZimlet_restartBrowser"), DwtMessageDialog.WARNING_STYLE);
 	dlg.popup();
 };
 
@@ -543,4 +546,67 @@ function() {
 	window.onbeforeunload = null;
 	var url = AjxUtil.formatUrl({});
 	ZmZimbraMail.sendRedirect(url);
+};
+
+//--------------------------------------------------------------------------------------------------
+// SAVE TEMPLATE TO TEMPLATE FOLDER
+//--------------------------------------------------------------------------------------------------
+
+Com_Zimbra_EmailTemplates.prototype._saveTemplate =
+function () {
+
+    appCtxt.getCurrentController().saveDraft(
+        null,
+        null,
+        null,
+        new AjxCallback(
+            this,
+            this._doSaveTemplate,
+            []
+        )
+    );
+
+};
+
+Com_Zimbra_EmailTemplates.prototype._doSaveTemplate =
+function () {
+
+    var msg = appCtxt.getCurrentController().getMsg();
+
+    if (msg.subject == "") {
+
+        var dlg = appCtxt.getMsgDialog()
+        dlg.setMessage(
+            this.getMessage("EmailTemplatesZimlet_noSubject"),
+            DwtMessageDialog.CRITICAL_STYLE
+        );
+        dlg.setTitle(
+            this.getMessage("EmailTemplatesZimlet_noSubject_title")
+        )
+        dlg.popup();
+
+        return;
+
+    }
+
+    var folder = this._folderPath;
+
+    if (folder[0] == "/") {
+
+        folder = folder.substr(1, folder.length - 1);
+
+    }
+
+    msg.move(
+        appCtxt.getFolderTree().getByPath(folder).id
+    );
+
+    var dlg = appCtxt.getMsgDialog();
+    dlg.setMessage(
+        this.getMessage("EmailTemplatesZimlet_saved"),
+        DwtMessageDialog.INFO_STYLE
+    );
+    dlg.setTitle(this.getMessage("EmailTemplatesZimlet_saved_title"));
+    dlg.popup();
+
 };
