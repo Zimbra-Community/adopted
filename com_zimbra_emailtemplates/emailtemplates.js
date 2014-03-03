@@ -610,3 +610,19 @@ function () {
     dlg.popup();
 
 };
+
+Com_Zimbra_EmailTemplates.prototype.singleClicked =
+function (canvas) {
+
+    this._displayPrefDialog();
+
+
+};
+
+Com_Zimbra_EmailTemplates.prototype.doubleClicked =
+function (canvas) {
+
+    this._displayPrefDialog();
+
+
+};

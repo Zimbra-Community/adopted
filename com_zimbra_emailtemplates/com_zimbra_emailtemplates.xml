@@ -2,7 +2,8 @@
   <include>emailtemplates.js</include>
 	<includeCSS>emailtemplates.css</includeCSS>
   <handlerObject>Com_Zimbra_EmailTemplates</handlerObject>
-
+  <zimletPanelItem icon="Message"
+    label="${msg.EmailTemplatesZimlet_templates}" />
   <userProperties>
 		<property type="string" name="etemplates_sourcefolderPath" value=""/>	
   </userProperties>
