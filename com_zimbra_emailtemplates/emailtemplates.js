@@ -277,7 +277,7 @@ function() {
 	var currentBodyContent = params.currentBodyContent;
 	for (var i = 0; i < this._replaceFieldIdsMap.length; i++) {
 		var obj = this._replaceFieldIdsMap[i];
-		var key = obj.key;
+		var key = "${" + obj.key + "}";
 		key = key.replace(/\$\{/,"\\$\\{").replace(/\}$/, "\\}");
 		var regEx = new RegExp(key, "ig");
 		var val = document.getElementById(obj.id).value;
