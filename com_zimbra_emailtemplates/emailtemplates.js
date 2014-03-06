@@ -601,6 +601,10 @@ function () {
         appCtxt.getFolderTree().getByPath(folder).id
     );
 
+    // Reload templates after saving a new one
+
+    this._getRecentEmails();
+
     var dlg = appCtxt.getMsgDialog();
     dlg.setMessage(
         this.getMessage("EmailTemplatesZimlet_saved"),
