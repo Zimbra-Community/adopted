@@ -597,13 +597,16 @@ function () {
 
     }
 
+    // Move mail to template folder and reload templates afterwards
+
     msg.move(
-        appCtxt.getFolderTree().getByPath(folder).id
+        appCtxt.getFolderTree().getByPath(folder).id,
+        new AjxCallback(
+            this,
+            this._getRecentEmails,
+            []
+        )
     );
-
-    // Reload templates after saving a new one
-
-    this._getRecentEmails();
 
     var dlg = appCtxt.getMsgDialog();
     dlg.setMessage(
