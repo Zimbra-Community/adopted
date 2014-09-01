@@ -21,6 +21,13 @@ Currently available
  * Email-Templates zimlet [com_zimbra_emailtemplates](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_emailtemplates). ([Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/email-templates))
  * Linkedin zimlet [com_zimbra_linkedin](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_linkedin). ([Original zimlet by jiankuan](http://gallery.zimbra.com/type/zimlet/linkedin-zimlet))
  * Sticky Notes [com_zimbra_stickynotes](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_stickynotes). ([Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/sticky-notes))
+ 
+Zimbra-Support
+--------------
+
+These zimlets work in the latest Zimbra 8.0-release.
+
+Support for 8.5 is currently in development (see [issue 10](https://github.com/Zimbra-Community/adopted/issues/10)).
 
 Using the zimlets
 -----------------
