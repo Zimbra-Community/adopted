@@ -65,7 +65,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
         style: DwtSash.HORIZONTAL_STYLE
     });
 
-    this.dwtSash.setLocation(-5, "50%");
+    this.dwtSash.setLocation(-7, "50%");
 
     this.dwtSash.registerCallback(function(delta) {
         var sidebar = document.getElementById("skin_container_sidebar_ad");
@@ -709,7 +709,9 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.setVisible = function (visible) {
     /* Hide/show the sidebar */
     var ad = document.getElementById('skin_td_sidebar_ad');
     ad.className = ""; /* remove outer_ad style */
-    ad.style.display = (visible ? 'table-cell' : 'none');
+    ad.style.display = (visible ? 'block' : 'none');
+    ad.style.position = "absolute";
+    ad.style.right = 0;
     /* Resize */
     this.resize();
     /* Show/hide controls */
@@ -756,7 +758,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.resize = function ()
         this.dwtRoot.setLocation (rect.x + 8, rect.y);
         this.dwtRoot.setSize(rect.width - 8, rect.height);
         this.dwtSubRoot.setSize(rect.width - 8, rect.height);
-        this.dwtSash.setLocation(-5, "50%");
+        this.dwtSash.setLocation(-7, "50%");
     }
 };
 
