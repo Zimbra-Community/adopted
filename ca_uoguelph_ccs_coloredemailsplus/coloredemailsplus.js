@@ -305,7 +305,7 @@ ColoredEmails.prototype.showPreferenceDlg = function() {
 	this.preferenceView.getHtmlElement().innerHTML = this.createPrefView();
 
 	var pickrComposite = new DwtComposite(this.getShell());
-	this.fontColorButton = new ZmHtmlEditorColorPicker(pickrComposite, null, "ZButton");
+	this.fontColorButton = new DwtButtonColorPicker(pickrComposite, null, "ZButton");
 	this.fontColorButton.dontStealFocus();
 	this.fontColorButton.setImage("FontColor");
 	this.fontColorButton.showColorDisplay(true);
@@ -314,7 +314,7 @@ ColoredEmails.prototype.showPreferenceDlg = function() {
 	document.getElementById("cEmail_colorsMenuTD").appendChild(pickrComposite.getHtmlElement());
 
 	var pickrBgComposite = new DwtComposite(this.getShell());
-	this.fontBackgroundButton = new ZmHtmlEditorColorPicker(pickrBgComposite, null, "ZButton");
+	this.fontBackgroundButton = new DwtButtonColorPicker(pickrBgComposite, null, "ZButton");
 	this.fontBackgroundButton.dontStealFocus();
 	this.fontBackgroundButton.setImage("FontBackground");
 	this.fontBackgroundButton.showColorDisplay(true);
@@ -375,7 +375,7 @@ ColoredEmails.prototype.showPreferenceDlg = function() {
 	contentTableFColorCell.className = "editing";
 	contentTableFColorCell.style.width = "62px";
 	var editPickrComposite = new DwtComposite(this.getShell());
-	this.fontColorEditButton = new ZmHtmlEditorColorPicker(editPickrComposite, null, "ZButton");
+	this.fontColorEditButton = new DwtButtonColorPicker(editPickrComposite, null, "ZButton");
 	this.fontColorEditButton.dontStealFocus();
 	this.fontColorEditButton.setImage("FontColor");
 	this.fontColorEditButton.showColorDisplay(true);
@@ -387,7 +387,7 @@ ColoredEmails.prototype.showPreferenceDlg = function() {
 	contentTableBColorCell.className = "editing";	
 	contentTableBColorCell.style.width = "62px";
 	var editPickrBgComposite = new DwtComposite(this.getShell());
-	this.fontBackgroundEditButton = new ZmHtmlEditorColorPicker(editPickrBgComposite, null, "ZButton");
+	this.fontBackgroundEditButton = new DwtButtonColorPicker(editPickrBgComposite, null, "ZButton");
 	this.fontBackgroundEditButton.dontStealFocus();
 	this.fontBackgroundEditButton.setImage("FontBackground");
 	this.fontBackgroundEditButton.showColorDisplay(true);
