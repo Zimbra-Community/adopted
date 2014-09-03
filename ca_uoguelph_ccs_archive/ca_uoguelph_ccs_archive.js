@@ -69,6 +69,14 @@ CcsArchive.prototype.init = function () {
     // the saved preference on how to archive
     this.archiveBy = this.getUserProperty(CcsArchive.CCS_ARCHIVE_BY_PREFERENCE);
     this.runAutoArchive();
+
+    shortcutHandler = new de_dieploegers_shortcutHandler(
+        ca_uoguelph_ccs_archive,
+        new AjxCallback(
+            this,
+            this.handleActionCode
+        )
+    );
 };
 
 /**
@@ -1095,3 +1103,22 @@ Object.keys = Object.keys || function(o) {
     return result;  
 };
 
+// Key handling
+
+CcsArchive.prototype.getKeyMapName = function () {
+
+    return "SHORTCUTS";
+
+};
+
+CcsArchive.prototype.handleActionCode = function (actionCode) {
+
+    if (actionCode == "DO_ARCHIVE") {
+
+        this.archiveSelectedEmails({
+            controller: appCtxt.getCurrentController()
+        });
+
+    }
+
+};

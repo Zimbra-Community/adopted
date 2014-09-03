@@ -1,5 +1,6 @@
 <zimlet name="ca_uoguelph_ccs_archive" version="2.0.2" label="Archive" description="Archives emails in the inbox by date.">
   <include>ca_uoguelph_ccs_archive.js</include>
+  <include>de_dieploegers_shortcutHandler.js</include>
   <includeCSS>ca_uoguelph_ccs_archive.css</includeCSS>
   <handlerObject>ca_uoguelph_ccs_archiveHandlerObject</handlerObject>
   <userProperties>
