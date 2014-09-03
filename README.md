@@ -25,9 +25,8 @@ Currently available
 Zimbra-Support
 --------------
 
-These zimlets work in the latest Zimbra 8.0-release.
-
-Support for 8.5 is currently in development (see [issue 10](https://github.com/Zimbra-Community/adopted/issues/10)).
+ * The release 8.0 supports ZCS 8.0.x
+ * The release 8.5 supports ZCS 8.5.x
 
 Using the zimlets
 -----------------
