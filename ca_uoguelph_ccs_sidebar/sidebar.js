@@ -130,7 +130,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
     //this.dwtTree.getHtmlElement().style.overflowX = 'hidden';
 
 
-    if (this.getConfig("enable_help").toLowerCase() == "true") {
+    if (this.getLCConfig("enable_help") == "true") {
         this.dwtHelp = new DwtTreeItem
         ({
             parent: this.dwtTree,
@@ -148,7 +148,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
     var sections = ["Today","Tomorrow","Week","Tasks","News"];
     for (var i in sections) {
         var section=sections[i];
-        if (this.getConfig("enable_"+section.toLowerCase()).toLowerCase() ==
+        if (this.getLCConfig("enable_"+section.toLowerCase()) ==
             "true") {
             var dti=new DwtTreeItem
             ({
@@ -226,6 +226,20 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.init = function ()
     }
 
 };
+
+ca_uoguelph_ccs_sidebarHandlerObject.prototype.getLCConfig = function (config) {
+
+    var value = this.getConfig(config);
+
+    if (value) {
+
+        value = value.toLowerCase();
+
+    }
+
+    return value;
+
+}
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.onShowView = function (view) {
 
@@ -668,6 +682,16 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.update = function ()
     if (this.show[this.appId] != true)
         return;
 
+    // Skip this, if we're offline and also hide the sidebar.
+
+    if (appCtxt.isWebClientOffline()) {
+
+        this.setVisible(false);
+
+        return;
+
+    }
+
     if (this.updating)
         return ;
 
@@ -747,7 +771,15 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.setAppId = function (id)
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.notify = function ()
 {
-    this.setVisible (this.show[this.appId] == true);
+    if (this.show[this.appId] && ! appCtxt.isWebClientOffline()) {
+
+        this.setVisible(true);
+
+    } else {
+
+        this.setVisible(false);
+
+    }
 };
 
 ca_uoguelph_ccs_sidebarHandlerObject.prototype.resize = function ()
@@ -755,6 +787,7 @@ ca_uoguelph_ccs_sidebarHandlerObject.prototype.resize = function ()
     var rect;
     if (this.visible) {
         rect = Dwt.getBounds(document.getElementById('skin_container_sidebar_ad'));
+        rect.height=$(document).height()-rect.y; // I added this line because rect.height was always at 0
         this.dwtRoot.setLocation (rect.x + 8, rect.y);
         this.dwtRoot.setSize(rect.width - 8, rect.height);
         this.dwtSubRoot.setSize(rect.width - 8, rect.height);
