@@ -65,7 +65,7 @@ function() {
 		return;
 	this._attachStr = this.getMessage("AttachmentAlert_attach");
 	this._errorMsgStr = this.getMessage("AttachmentAlert_error_noattachment");
-	this._attachWordsList = [this._attachStr];
+	this._attachWordsList = this._attachStr.split(",");
 	this._attachWordsRegEx = [];
 	for (var n = 0; n < this._attachWordsList.length; n++) {
 		this._attachWordsRegEx.push(new RegExp("\\b" + this._attachWordsList[n], "ig"));
