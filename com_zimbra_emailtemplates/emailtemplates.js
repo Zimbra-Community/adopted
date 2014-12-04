@@ -571,7 +571,7 @@ function () {
 Com_Zimbra_EmailTemplates.prototype._doSaveTemplate =
 function () {
 
-    var msg = appCtxt.getCurrentController().getMsg();
+    var msg = appCtxt.getCurrentView().getMsg();
 
     if (msg.subject == "") {
 
