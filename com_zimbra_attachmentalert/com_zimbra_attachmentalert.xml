@@ -1,4 +1,4 @@
-<zimlet name="com_zimbra_attachmentalert" version="1.6" label="${msg.label}" description="${msg.description}" target="main compose-window">
+<zimlet name="com_zimbra_attachmentalert" version="1.7" label="${msg.label}" description="${msg.description}" target="main compose-window">
 	<include>attachmentalert.js</include>
 	<includeCSS>attachmentalert.css</includeCSS>
 	<resource>attachmentalert-icon.gif</resource>
