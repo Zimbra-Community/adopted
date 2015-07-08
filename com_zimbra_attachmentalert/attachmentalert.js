@@ -63,8 +63,8 @@ AttachAlertZimlet.prototype._initializeRegEx =
 function() {
 	if (this._attachWordsRegEx)
 		return;
-	this._attachStr = this.getMessage("AttachmentAlert_attach");
-	this._errorMsgStr = this.getMessage("AttachmentAlert_error_noattachment");
+	this._attachStr = (this.getMessage("AttachmentAlert_attach").indexOf('???')>=0 ? 'attach,bijlage' : this.getMessage("AttachmentAlert_attach"));
+	this._errorMsgStr = (this.getMessage("AttachmentAlert_error_noattachment").indexOf('???')>=0 ? 'No attachment(s) found. Continue?' : this.getMessage("AttachmentAlert_error_noattachment"));
 	this._attachWordsList = this._attachStr.split(",");
 	this._attachWordsRegEx = [];
 	for (var n = 0; n < this._attachWordsList.length; n++) {
@@ -191,7 +191,7 @@ function() {
 	}
 
 	var dialog_args = {
-			title	: this.getMessage("AttachmentAlert_dialog_preferences_title"),
+			title	: (this.getMessage("AttachmentAlert_dialog_preferences_title").indexOf('???')>=0 ? 'Attachment Alert: Preferences' : this.getMessage("AttachmentAlert_dialog_preferences_title")),
 			view	: this.pView,
 			standardButtons	: [DwtDialog.OK_BUTTON],
 			parent	: this.getShell()
@@ -214,7 +214,7 @@ function() {
     html[i++] = "<input id='";
     html[i++] = AttachAlertZimlet.ELEMENT_ID_CHECKBOX_ALERT_ON;
     html[i++] = "'  type='checkbox'/>";
-    html[i++] = this.getMessage("AttachmentAlert_dialog_preferences_alert_text");
+    html[i++] = (this.getMessage("AttachmentAlert_dialog_preferences_alert_text").indexOf('???')>=0 ? 'Enable "Attachment Alert" Zimlet (requires a browser refresh)' : this.getMessage("AttachmentAlert_dialog_preferences_alert_text")),
     html[i++] = "</div>";
     return html.join("");
 };
