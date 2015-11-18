@@ -9,7 +9,7 @@ This repository holds zimlets, that were adopted by developers by seemingly or a
 If you have other zimlets, that you've updated but can't reach the author so he/she could update the gallery, please
 send a pull request to have them included here.
 
-The zimlets available here mostly are more compatible with current Zimbra versions and have bugs fixed and 
+The zimlets available here mostly are more compatible with current Zimbra versions and have bugs fixed and
 new features added.
 
 Currently available
@@ -20,8 +20,8 @@ Currently available
  * Sidebar zimlet [ca_uoguelph_ccs_sidebar](https://github.com/Zimbra-Community/adopted/tree/master/ca_uoguelph_ccs_sidebar). ([Original zimlet by ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/news-and-events-sidebar))
  * Email-Templates zimlet [com_zimbra_emailtemplates](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_emailtemplates). ([Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/email-templates))
  * Sticky Notes [com_zimbra_stickynotes](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_stickynotes). ([Original zimlet by rrao](http://gallery.zimbra.com/type/zimlet/sticky-notes))
- * Attachment alert [com_zimbra_attachmentalert](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra/attachmentalert): ([Original zimlet by rrao](https://gallery.zimbra.com/type/zimlet/attachment-alert))
- 
+ * Attachment alert [com_zimbra_attachmentalert](https://github.com/Zimbra-Community/adopted/tree/master/com_zimbra_attachmentalert): ([Original zimlet by rrao](https://gallery.zimbra.com/type/zimlet/attachment-alert))
+
 Zimbra-Support
 --------------
 

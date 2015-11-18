@@ -1,6 +1,6 @@
 <zimlet name="ca_uoguelph_ccs_sidebar" version="1.6"
-    label="News and Events Sidebar"
-    description="Displays news and upcoming events">
+    label="${msg.label}"
+    description="${msg.description}">
     <include>sidebar.js</include>
     <includeCSS>sidebar.css</includeCSS>
     <handlerObject>ca_uoguelph_ccs_sidebarHandlerObject</handlerObject>
