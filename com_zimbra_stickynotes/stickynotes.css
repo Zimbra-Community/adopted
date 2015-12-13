@@ -12,7 +12,7 @@
 	font-size:16px;font-family:Arial,Helvetica,sans-serif;
 	overflow:auto;
 	background-color:#FFFFCC;
-	border-left:0px solid #A7A194;border-top:0px solid #A7A194; border-bottom:2px solid #A7A194;border-right:2px solid #A7A194;
+	border:0px;
   width: 248px;
   height: 250px;
     display:block;
@@ -26,7 +26,8 @@
 	font-size:16px;font-family:Arial,Helvetica,sans-serif;
 	overflow:auto;
 	background-color:#FFFFCC;
-	border-left:0px solid #A7A194;border-top:0px solid #A7A194; border-bottom:2px solid #A7A194;border-right:2px solid #A7A194;
+   margin-top:3px;
+	border:0px;
 	  width: 246px;
   height: 24px;
   display:block;

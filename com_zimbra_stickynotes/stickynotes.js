@@ -53,7 +53,7 @@ function() {
 
 StickyNotesZimlet.prototype.onShowView =
 function(viewId, isNewView) {
-	if(viewId == "CNS" || viewId == "CAL") {
+   if(viewId == "CNS" || viewId == "CAL" || viewId == "CNS-main") {
 		var controller = appCtxt.getCurrentController();
 		try{
 			if(viewId == "CAL") {//in calendar, there are multiple views and viewId doesnt match internal views
@@ -272,8 +272,8 @@ function(content) {
 	var i = 0;
 	html.push("<DIV id ='stickyn_actionContainerID' class='stickyn_axnClass'>",
 	"<table width='100%'><tr><td width='85%'></td><td width='5%'>",
-	"<img  style='cursor:pointer;' src=\"", this.getResource("sticky_deleteBtn.gif"), "\" id='stickyn_deleteBtn' /></td>",
-	"<td width='5%'></td><td width='5%'><div  style='cursor:pointer;' class='ImgSave' id='stickyn_closeBtn'/></td></tr>",
+	"<img  style='cursor:pointer;' src=\"", this.getResource("sticky_deleteBtn.png"), "\" id='stickyn_deleteBtn' /></td>",
+	"<td width='5%'></td><td width='5%'><img  style='cursor:pointer;' src=\"", this.getResource("sticky_saveBtn.png"), "\" id='stickyn_closeBtn'/></td></tr>",
 	"</table></DIV>",
 	"<TEXTAREA  id ='stickyn_textAreaID'class='stickyn_textAreaClass'>",
 	"</TEXTAREA>");
@@ -356,7 +356,12 @@ function(controller) {
 	if (!this.turnONstickynotesZimlet)
 		return;
 
+   try {
 	var selectedItms = controller.getCurrentView().getSelection();
+   } catch (err) {
+   var selectedItms = controller.getCurrentView().getListView().getSelection();
+   }
+   
 	if (selectedItms.length > 0) {
 		this.srcMsgObj = selectedItms[0];
 		if (this.srcMsgObj.type == "CONV") {
@@ -429,7 +434,13 @@ function(controller) {
 	if (!this.turnONstickynotesZimlet) {
 		return;
 	}
+   
+   try {
 	var selectedItms = controller.getCurrentView().getSelection();
+   } catch (err) {
+   var selectedItms = controller.getCurrentView().getListView().getSelection();
+   }
+   
 	if (selectedItms.length > 0) {
 		this.srcMsgObj = selectedItms[0];
 		this._itemId = this.srcMsgObj.id;
