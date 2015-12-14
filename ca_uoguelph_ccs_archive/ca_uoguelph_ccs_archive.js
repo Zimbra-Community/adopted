@@ -599,24 +599,20 @@ CcsArchive.prototype.organizeMessages = function(params) {
  * @returns {Boolean} whether an ajax request was called
  */
 CcsArchive.prototype.loadConvsAndContinue = function(selectedEmails) {
-    var batchCmd = new ZmBatchCommand(true);
-    
-    var num = selectedEmails.length;    
-    for ( var i = 0; i < num; i++) {
-        var item = selectedEmails[i];
-        if (ZmId.ITEM_CONV === item.type && !item.msgs) {
-            item.loadMsgs({fetchAll : true}, null, batchCmd);
-            // increase id of the next request in the batch object... this should have been done automatically
-            // but the loadMsgs uses ZmBatchCommand.addRequestParam instead of ZmBatchCommand.addNewRequestParam
-            batchCmd.curId++;
-        }
-    }
-    if (batchCmd.size() > 0) {
-        batchCmd.run(new AjxCallback(this, this.archiveSelectedEmails, [{selectedEmails: selectedEmails, convLoaded: true}]));
-        return false;
-    }
-    return true;
+   var batchCmd = new ZmBatchCommand(true);
+   
+   var num = selectedEmails.length;    
+   for ( var i = 0; i < num; i++) {
+      var item = selectedEmails[i];
+      if (ZmId.ITEM_CONV === item.type && !item.msgs) {
+      var ajxCallback = new AjxCallback(this, this.archiveSelectedEmails, [{selectedEmails: selectedEmails, convLoaded: false}]);
+      this.getMsgsForConv( ajxCallback, item );
+      return false;
+      }
+   }
+   return true;
 };
+
 
 /**
  * Archives the selected email messages or conversations
