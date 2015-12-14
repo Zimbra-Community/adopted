@@ -598,9 +598,7 @@ CcsArchive.prototype.organizeMessages = function(params) {
  * @param {Array} selectedEmails the array of selected emails
  * @returns {Boolean} whether an ajax request was called
  */
-CcsArchive.prototype.loadConvsAndContinue = function(selectedEmails) {
-   var batchCmd = new ZmBatchCommand(true);
-   
+CcsArchive.prototype.loadConvsAndContinue = function(selectedEmails) {  
    var num = selectedEmails.length;    
    for ( var i = 0; i < num; i++) {
       var item = selectedEmails[i];
