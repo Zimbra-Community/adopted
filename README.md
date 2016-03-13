@@ -12,6 +12,6 @@ Added Features:
 - Ability to set a default colour to be used by all messages that don't have a particular colour setting in place.
 - Automatically set colours for all the addresses in the mailbox.
 
-Broken in Zimbra 8.6:
+This Zimlet is broken in Zimbra 8.6:
 -------------------
- * ~~Colored Emails Plus [ca_uoguelph_ccs_coloredemailsplus](https://github.com/Zimbra-Community/adopted/tree/master/ca_uoguelph_ccs_coloredemailsplus). ([Original zimlet ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/coloured-emails-plus))~~ (currently not available. Please see issue #24)
+[https://github.com/Zimbra-Community/ca_uoguelph_ccs_coloredemailsplus/issues/24](https://github.com/Zimbra-Community/ca_uoguelph_ccs_coloredemailsplus/issues/24)
