@@ -1,9 +1,17 @@
-Adopted Zimlets and developments
+Colored Emails Plus
 ================================
 
-This repository is depricated, as soon as no more open bugs exists, zimlets will be moved
-into separate repositories under https://github.com/Zimbra-Community
+_This is the adopted version of the Colored Emails Plus from University of Guelph and is based on the work by rrao._
 
-Currently still here but broken in 8.6:
+Added Features:
+
+- Drag and drop emails or tags onto the panel item to add coloured label.
+- The entries list displays a preview of the colours set for each email or tag.
+- Double click on a listed setting to edit.
+- Delete multiple entries at a time.
+- Ability to set a default colour to be used by all messages that don't have a particular colour setting in place.
+- Automatically set colours for all the addresses in the mailbox.
+
+Broken in Zimbra 8.6:
 -------------------
  * ~~Colored Emails Plus [ca_uoguelph_ccs_coloredemailsplus](https://github.com/Zimbra-Community/adopted/tree/master/ca_uoguelph_ccs_coloredemailsplus). ([Original zimlet ccs.uoguelph](http://gallery.zimbra.com/type/zimlet/coloured-emails-plus))~~ (currently not available. Please see issue #24)
